@@ -11,8 +11,8 @@ var images: [String] = ["Prince Pepe", "Baby", "Weird Cat", "Doge", "Pepe Homer"
 
 struct ContentView: View {
     @State var selectedImage: String = images[0]
-    @State var text: String = "Test"
-    @State var showText: Bool = true
+    @State var text: String = ""
+    @State var showText: Bool = false
     @State var addShadow: Bool = false
     @State var position: Float = 0.0
     @State var color: Color = .white
@@ -42,7 +42,7 @@ struct ContentView: View {
                                     .foregroundStyle(color)
                                     .shadow(
                                         color: color,
-                                        radius: addShadow ? 10 : 0
+                                        radius: addShadow ? 8 : 0
                                     )
                                     .offset(y: CGFloat(position))
                             }
