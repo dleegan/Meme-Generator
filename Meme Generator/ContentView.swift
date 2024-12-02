@@ -55,72 +55,15 @@ struct ContentView: View {
 
             Divider()
 
-            ScrollView(.horizontal, content: {
-                HStack(spacing: 10) {
-                    ForEach(images, id: \.self) { image in
-                        Button {
-                            selectedImage = image
-                        } label: {
-                            Image(image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(
-                                    width: 80,
-                                    height: 80,
-                                    alignment: .top
-                                )
-                                .clipShape(
-                                    RoundedRectangle(
-                                        cornerRadius: 10
-                                    )
-                                )
-                                .overlay {
-                                    if selectedImage == image {
-                                        VStack {
-                                            Image(systemName: "checkmark.circle.fill")
-                                                .foregroundStyle(.white)
-                                        }
-                                        .padding(2)
-                                        .frame(
-                                            width: 80,
-                                            height: 80,
-                                            alignment: .topTrailing
-                                        )
-                                    }
-                                }
-                        }
-                    }
-                }
-            })
-            .contentMargins(.horizontal, 10)
+            ImagesSelector(selectedImage: $selectedImage)
 
-            VStack(spacing: 20) {
-                Toggle(isOn: $showText) {
-                    Text("Texte")
-                        .font(.title3)
-                        .bold()
-                }
-
-                if showText {
-                    VStack {
-                        TextField("Votre Text", text: $text)
-                            .textFieldStyle(.roundedBorder)
-
-                        Toggle(isOn: $addShadow) {
-                            Text("Ombre")
-                        }
-
-                        HStack {
-                            Text("Position")
-                            Slider(value: $position, in: -130 ... 130)
-                        }
-
-                        ColorPicker("Couleur", selection: $color)
-                    }
-                }
-                Spacer()
-            }
-            .padding()
+            GeneratorOptions(
+                text: $text,
+                showText: $showText,
+                addShadow: $addShadow,
+                position: $position,
+                color: $color
+            )
         }
     }
 }
