@@ -16,11 +16,12 @@ struct ContentView: View {
     @State var addShadow: Bool = false
     @State var position: Float = 0.0
     @State var color: Color = .white
+    @State var avatarImage: Image? = nil
 
     var body: some View {
         VStack {
             VStack {
-                Image(selectedImage)
+                myImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(
@@ -55,7 +56,7 @@ struct ContentView: View {
 
             Divider()
 
-            ImagesSelector(selectedImage: $selectedImage)
+            ImagesSelector(selectedImage: $selectedImage, avatarImage: $avatarImage)
 
             GeneratorOptions(
                 text: $text,
@@ -65,6 +66,10 @@ struct ContentView: View {
                 color: $color
             )
         }
+    }
+    
+    private var myImage: Image {
+        avatarImage ?? Image(selectedImage)
     }
 }
 

@@ -40,6 +40,17 @@ struct GeneratorOptions: View {
                 }
             }
             Spacer()
+            HStack(alignment: .center) {
+                Text("Sauvegarder")
+                Image(systemName: "square.and.arrow.down")
+            }
+            .bold()
+            .foregroundStyle(Color.blue)
+            .padding()
+            .background(Color.blue.opacity(0.2))
+            .clipShape(
+                RoundedRectangle(cornerRadius: 50)
+            )
         }
         .padding(.horizontal)
     }
