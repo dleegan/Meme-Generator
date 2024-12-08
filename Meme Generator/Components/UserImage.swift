@@ -9,12 +9,12 @@ import PhotosUI
 import SwiftUI
 
 struct UserImage: View {
-    @State private var avatarItem: PhotosPickerItem? = nil
-    @Binding var avatarImage: Image?
+    @State private var galleryItem: PhotosPickerItem? = nil
+    @Binding var galleryImage: Image?
 
     var body: some View {
         VStack {
-            PhotosPicker(selection: $avatarItem) {
+            PhotosPicker(selection: $galleryItem) {
                 RoundedRectangle(
                     cornerRadius: 10
                 )
@@ -35,16 +35,11 @@ struct UserImage: View {
                     }
                 })
             }
-
-//            avatarImage?
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 300, height: 300)
         }
-        .onChange(of: avatarItem) {
+        .onChange(of: galleryItem) {
             Task {
-                if let loaded = try? await avatarItem?.loadTransferable(type: Image.self) {
-                    avatarImage = loaded
+                if let loaded = try? await galleryItem?.loadTransferable(type: Image.self) {
+                    galleryImage = loaded
                 } else {
                     print("Failed")
                 }
@@ -54,7 +49,7 @@ struct UserImage: View {
 }
 
 #Preview {
-    @Previewable @State var avatarImage: Image?
+    @Previewable @State var galleryImage: Image?
 
-    UserImage(avatarImage: $avatarImage)
+    UserImage(galleryImage: $galleryImage)
 }

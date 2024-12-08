@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ImagesSelector: View {
     @Binding var selectedImage: String
-    @Binding var avatarImage: Image?
+    @Binding var galleryImage: Image?
 
     var body: some View {
         ScrollView(
             .horizontal,
             content: {
                 HStack(spacing: 10) {
+                    UserImage(galleryImage: $galleryImage)
+
                     ForEach(images, id: \.self) { image in
                         Button {
                             selectedImage = image
-                            if avatarImage != nil {
-                                avatarImage = nil
+                            if galleryImage != nil {
+                                galleryImage = nil
                             }
                         } label: {
                             Image(image)
@@ -37,7 +39,7 @@ struct ImagesSelector: View {
                                     )
                                 )
                                 .overlay {
-                                    if (avatarImage == nil) && selectedImage == image {
+                                    if (galleryImage == nil) && selectedImage == image {
                                         VStack {
                                             Image(
                                                 systemName: "checkmark.circle.fill"
@@ -54,8 +56,6 @@ struct ImagesSelector: View {
                                 }
                         }
                     }
-
-                    UserImage(avatarImage: $avatarImage)
                 }
                 .padding(.vertical, 10)
             })
@@ -65,7 +65,7 @@ struct ImagesSelector: View {
 
 #Preview {
     @Previewable @State var selectedImage = "Prince Pepe"
-    @Previewable @State var avatarImage: Image?
+    @Previewable @State var galleryImage: Image?
 
-    ImagesSelector(selectedImage: $selectedImage, avatarImage: $avatarImage)
+    ImagesSelector(selectedImage: $selectedImage, galleryImage: $galleryImage)
 }
